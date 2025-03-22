@@ -7,9 +7,15 @@
     <Filter Include="Hickory\Events">
       <UniqueIdentifier>{A27DE006-8E4B-D40C-77DF-4433634CB071}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Hazel.h" />
+    <ClInclude Include="src\Hickory.h" />
     <ClInclude Include="src\Hickory\Application.h">
       <Filter>Hickory</Filter>
     </ClInclude>
@@ -31,24 +37,39 @@
     <ClInclude Include="src\Hickory\Events\MouseEvent.h">
       <Filter>Hickory\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hickory\Layer.h">
+      <Filter>Hickory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hickory\LayerStack.h">
+      <Filter>Hickory</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hickory\Log.h">
       <Filter>Hickory</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hickory\Window.h">
+      <Filter>Hickory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\hckpch.h" />
-    <ClInclude Include="src\Hickory\Window.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hickory\Application.cpp">
       <Filter>Hickory</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hickory\Layer.cpp">
+      <Filter>Hickory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hickory\LayerStack.cpp">
+      <Filter>Hickory</Filter>
+    </ClCompile>
     <ClCompile Include="src\Hickory\Log.cpp">
       <Filter>Hickory</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\hckpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

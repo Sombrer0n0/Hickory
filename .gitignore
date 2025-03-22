@@ -2,7 +2,10 @@
 .vs/
 bin/
 bin-int/
+packages/
 
 
 # Files
 *.user
+*.sln
+*.bat

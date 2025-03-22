@@ -1,3 +1,6 @@
 [submodule "Hickory/vendor/spdlog"]
 	path = Hickory/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Hickory/vendor/GLFW"]
+	path = Hickory/vendor/GLFW
+	url = https://github.com/TheCherno/glfw.git

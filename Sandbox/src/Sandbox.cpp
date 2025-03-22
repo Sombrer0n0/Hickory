@@ -1,3 +1,4 @@
+#include "hckpch.h"
 #include <Hazel.h>
 
 class Sandbox :public Hickory::Application {
@@ -12,5 +13,5 @@ public:
 };
 
 Hickory::Application* Hickory::CreateApplication() {
-	return new Sandbox();
+	return new Sandbox();	
 }

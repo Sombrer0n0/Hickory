@@ -1,0 +1,3 @@
+[submodule "Hickory/vendor/spdlog"]
+	path = Hickory/vendor/spdlog
+	url = https://github.com/gabime/spdlog

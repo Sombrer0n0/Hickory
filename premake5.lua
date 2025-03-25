@@ -12,9 +12,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hickory/vendor/GLFW/include"
+IncludeDir["Glad"] = "Hickory/vendor/Glad/include"
+IncludeDir["ImGui"] = "Hickory/vendor/imgui"
 
 include "Hickory/vendor/GLFW"
-
+include "Hickory/vendor/Glad"
+include "Hickory/vendor/imgui"
 
 project "Hickory"
 	location "Hickory"
@@ -37,12 +40,16 @@ project "Hickory"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links 
 	{ 
 		"GLFW",
+		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -54,7 +61,8 @@ project "Hickory"
 		{
 			"HCK_PLATFORM_WINDOWS",
 			"HCK_BUILD_DLL",
-			"_DISABLE_CONSTEXPR_MUTEX_CONSTRUCTOR"
+			"_DISABLE_CONSTEXPR_MUTEX_CONSTRUCTOR",
+			"GLFW_INCLUDE_NONE"
 		}
 		postbuildcommands
 		{
@@ -97,7 +105,7 @@ project "Sandbox"
 	includedirs
 	{
 		"Hickory/vendor/spdlog/include",
-		"Hickory/src"
+		"Hickory/src" 
 	}
 
 	links

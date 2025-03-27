@@ -7,6 +7,8 @@
 #include "Hickory/Events/Event.h"
 #include "Hickory/Events/ApplicationEvent.h"
 
+#include "Hickory/ImGui/ImGuiLayer.h"
+
 namespace Hickory{
 	class HCK_API Application
 	{
@@ -28,6 +30,7 @@ namespace Hickory{
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	private:

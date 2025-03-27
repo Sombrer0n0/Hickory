@@ -1,5 +1,7 @@
 #include <Hickory.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Hickory::Layer
 {
 public:
@@ -12,6 +14,14 @@ public:
 	{
 		if (Hickory::Input::IsKeyPressed(HCK_KEY_TAB))
 			HCK_TRACE("Tab key is pressed (poll)!");
+	}
+	
+	
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	void OnEvent(Hickory::Event& event) override
@@ -31,7 +41,6 @@ class Sandbox :public Hickory::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Hickory::ImGuiLayer());
 	}
 	~Sandbox() {
 		 

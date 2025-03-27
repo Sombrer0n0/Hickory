@@ -109,6 +109,7 @@ project "Sandbox"
 	{
 		"Hickory/vendor/spdlog/include",
 		"Hickory/src",
+		"Hickory/vendor",
 		"%{IncludeDir.glm}"
 	}
 
@@ -131,7 +132,6 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "HCK_DEBUG"
 		runtime "Debug"
-		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"

@@ -22,7 +22,6 @@ namespace Hickory {
 	private:
 		static Input* s_Instance;
 
-
 	};
 
 

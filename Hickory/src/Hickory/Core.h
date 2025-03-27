@@ -10,6 +10,10 @@
 	#error HICKORY ONLY SUPPORT WINDOWS NOW!
 #endif
 
+#ifdef HZ_DEBUG
+	#define HZ_ENABLE_ASSERTS
+#endif
+
 #ifdef HCK_ENABLE_ASSERTS
 	#define HCK_ASSERT(x, ...) { if(!(x)) { HCK_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define HCK_CORE_ASSERT(x, ...) { if(!(x)) { HCK_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }

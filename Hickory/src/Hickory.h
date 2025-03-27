@@ -8,6 +8,10 @@
 
 #include "Hickory/ImGui/ImGuiLayer.h"
 
+#include "Hickory/Input.h"
+#include "Hickory/KeyCodes.h"
+#include "Hickory/MouseButtonCodes.h"
+
 //--------EntryPoint--------------------
 #include "Hickory/EntryPoint.h"
 //--------------------------------------

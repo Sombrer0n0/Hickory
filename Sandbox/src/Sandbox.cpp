@@ -10,12 +10,19 @@ public:
 
 	void OnUpdate() override
 	{
-		HCK_INFO("ExampleLayer::Update");
+		if (Hickory::Input::IsKeyPressed(HCK_KEY_TAB))
+			HCK_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(Hickory::Event& event) override
 	{
-		HCK_TRACE("{0}", event);
+		if (event.GetEventType() == Hickory::EventType::KeyPressed)
+		{
+			Hickory::KeyPressedEvent& e = (Hickory::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == HCK_KEY_TAB) 
+				HCK_TRACE("Tab key is pressed (event)!");
+			HCK_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 
 };

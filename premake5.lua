@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Hickory/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hickory/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hickory/vendor/imgui"
+IncludeDir["glm"] = "Hickory/vendor/glm"
 
 include "Hickory/vendor/GLFW"
 include "Hickory/vendor/Glad"
@@ -23,6 +24,7 @@ project "Hickory"
 	location "Hickory"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -33,7 +35,9 @@ project "Hickory"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -42,7 +46,8 @@ project "Hickory"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -55,7 +60,6 @@ project "Hickory"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 		defines
 		{
@@ -66,32 +70,31 @@ project "Hickory"
 		}
 		postbuildcommands
 		{
-			("{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 		buildoptions "/utf-8"
 
 	filter "configurations:Debug"
 		defines "HCK_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "HCK_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "HCK_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
-
-	filter {"system:windows","configurations:Release"}
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -105,7 +108,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Hickory/vendor/spdlog/include",
-		"Hickory/src" 
+		"Hickory/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -115,7 +119,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 		defines
 		{
@@ -127,20 +130,19 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "HCK_DEBUG"
+		runtime "Debug"
 		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "HCK_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "HCK_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
-
-	filter {"system:windows","configurations:Release"}
 
 
 

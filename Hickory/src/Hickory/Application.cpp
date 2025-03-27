@@ -4,6 +4,7 @@
 #include "Hickory/Log.h"
 
 #include <glad/glad.h>
+#include "Input.h"
 
 namespace Hickory {
 
@@ -24,17 +25,16 @@ namespace Hickory {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
 		m_LayerStack.PushOverlay(layer);
-		layer->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 

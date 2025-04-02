@@ -16,15 +16,19 @@ IncludeDir["Glad"] = "Hickory/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hickory/vendor/imgui"
 IncludeDir["glm"] = "Hickory/vendor/glm"
 
+group "Dependencies"
 include "Hickory/vendor/GLFW"
 include "Hickory/vendor/Glad"
 include "Hickory/vendor/imgui"
 
+group ""
+
 project "Hickory"
 	location "Hickory"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -39,7 +43,12 @@ project "Hickory"
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
-
+	
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+	
 	includedirs
 	{
 		"%{prj.name}/src",
@@ -59,8 +68,8 @@ project "Hickory"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
+		
 		defines
 		{
 			"HCK_PLATFORM_WINDOWS",
@@ -68,33 +77,30 @@ project "Hickory"
 			"_DISABLE_CONSTEXPR_MUTEX_CONSTRUCTOR",
 			"GLFW_INCLUDE_NONE"
 		}
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
-		buildoptions "/utf-8"
+		
+	buildoptions "/utf-8"
 
 	filter "configurations:Debug"
 		defines "HCK_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "HCK_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "HCK_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"
+	cppdialect "C++17"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -119,7 +125,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		defines
 		{
@@ -132,17 +137,17 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "HCK_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "HCK_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "HCK_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 
 

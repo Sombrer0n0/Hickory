@@ -2,6 +2,8 @@
 
 #include "Hickory/Window.h"
 
+#include "Hickory/Renderer/GraphicsContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Hickory {
@@ -27,6 +29,7 @@ namespace Hickory {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

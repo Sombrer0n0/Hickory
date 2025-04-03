@@ -11,6 +11,7 @@
 
 #include "Hickory/Renderer/Shader.h"
 #include "Hickory/Renderer/Buffer.h"
+#include "Hickory/Renderer/VertexArray.h"
 
 namespace Hickory{
 	class HCK_API Application
@@ -36,10 +37,12 @@ namespace Hickory{
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-		unsigned int m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 	private:
 		static Application* s_Instance;
 	};

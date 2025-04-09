@@ -13,6 +13,8 @@
 #include "Hickory/Renderer/Buffer.h"
 #include "Hickory/Renderer/VertexArray.h"
 
+#include "Hickory/Renderer/OrthographicCamera.h"
+
 namespace Hickory{
 	class HCK_API Application
 	{
@@ -43,6 +45,8 @@ namespace Hickory{
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};

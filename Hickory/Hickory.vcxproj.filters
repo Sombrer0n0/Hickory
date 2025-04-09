@@ -1353,6 +1353,18 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hickory\Renderer\Buffer.h" />
+    <ClInclude Include="src\Hickory\Renderer\Renderer.h" />
+    <ClInclude Include="src\Hickory\Renderer\Shader.h" />
+    <ClInclude Include="src\Hickory\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Hickory\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Hickory\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\Hickory\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Hickory\Renderer\OrthographicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hickory\Application.cpp">
@@ -1382,5 +1394,16 @@
     <ClCompile Include="src\hckpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hickory\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\OrthographicCamera.cpp" />
   </ItemGroup>
 </Project>

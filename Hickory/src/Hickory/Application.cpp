@@ -3,7 +3,8 @@
 
 #include "Hickory/Log.h"
 
-#include <glad/glad.h>
+#include "Hickory/Renderer/Renderer.h"
+
 #include "Input.h"
 
 namespace Hickory {
@@ -11,27 +12,9 @@ namespace Hickory {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 	Application* Application::s_Instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+	Application::Application()
+		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
-		switch (type)
-		{
-		case Hickory::ShaderDataType::Float:    return GL_FLOAT;
-		case Hickory::ShaderDataType::Float2:   return GL_FLOAT;
-		case Hickory::ShaderDataType::Float3:   return GL_FLOAT;
-		case Hickory::ShaderDataType::Float4:   return GL_FLOAT;
-		case Hickory::ShaderDataType::Mat3:     return GL_FLOAT;
-		case Hickory::ShaderDataType::Mat4:     return GL_FLOAT;
-		case Hickory::ShaderDataType::Int:      return GL_INT;
-		case Hickory::ShaderDataType::Int2:     return GL_INT;
-		case Hickory::ShaderDataType::Int3:     return GL_INT;
-		case Hickory::ShaderDataType::Int4:     return GL_INT;
-		case Hickory::ShaderDataType::Bool:     return GL_BOOL;
-		}
-
-		HCK_CORE_ASSERT(false, "Unknown ShaderDataType!");
-		return 0;
-	}
-	Application::Application() {
 		HCK_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -90,6 +73,8 @@ namespace Hickory {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ViewProjection;			
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
@@ -97,7 +82,7 @@ namespace Hickory {
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection*vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -122,13 +107,13 @@ namespace Hickory {
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
-
+			uniform mat4 u_ViewProjection;
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection*vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -175,22 +160,22 @@ namespace Hickory {
 				break;
 		}
 	}
-	;
 	void Application::run() {
 
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 
-			m_BlueShader->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
+			m_Camera.SetRotation(45.0f);
+			Renderer::BeginScene(m_Camera);
 
+			Renderer::Submit(m_BlueShader,m_SquareVA);
 
-			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_Shader,m_VertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

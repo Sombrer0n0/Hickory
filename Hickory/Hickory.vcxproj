@@ -146,6 +146,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Hickory\Core\TimeStep.h" />
     <ClInclude Include="src\Hickory\Renderer\Buffer.h" />
     <ClInclude Include="src\Hickory\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Hickory\Renderer\Renderer.h" />

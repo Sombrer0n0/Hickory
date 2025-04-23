@@ -21,6 +21,7 @@
 #include "Hickory/Renderer/Shader.h"
 #include "Hickory/Renderer/VertexArray.h"
 
+#include "Hickory/Renderer/Texture.h"
 #include "Hickory/Renderer/OrthographicCamera.h"
 //--------------------------------------
 

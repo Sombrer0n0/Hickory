@@ -7,6 +7,11 @@ workspace "Hickory"
 		"Release",
 		"Dist"
 	}
+	
+	flags
+	{
+		"MultiProcessorCompile"
+	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -15,11 +20,13 @@ IncludeDir["GLFW"] = "Hickory/vendor/GLFW/include"
 IncludeDir["Glad"] = "Hickory/vendor/Glad/include"
 IncludeDir["ImGui"] = "Hickory/vendor/imgui"
 IncludeDir["glm"] = "Hickory/vendor/glm"
+IncludeDir["stb_image"] = "Hickory/vendor/stb_image"
 
 group "Dependencies"
 include "Hickory/vendor/GLFW"
 include "Hickory/vendor/Glad"
 include "Hickory/vendor/imgui"
+
 
 group ""
 
@@ -40,6 +47,8 @@ project "Hickory"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -56,7 +65,8 @@ project "Hickory"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 

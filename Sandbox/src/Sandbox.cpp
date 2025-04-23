@@ -10,7 +10,7 @@ class ExampleLayer : public Hickory::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
 		m_VertexArray.reset(Hickory::VertexArray::Create());
 
@@ -140,28 +140,12 @@ public:
 	void OnUpdate(Hickory::Timestep& ts) override
 	{
 
-		if (Hickory::Input::IsKeyPressed(HCK_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		else if (Hickory::Input::IsKeyPressed(HCK_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (Hickory::Input::IsKeyPressed(HCK_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		else if (Hickory::Input::IsKeyPressed(HCK_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		if (Hickory::Input::IsKeyPressed(HCK_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		else if (Hickory::Input::IsKeyPressed(HCK_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
+		m_CameraController.OnUpdate(ts);
 
 		Hickory::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Hickory::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
-		Hickory::Renderer::BeginScene(m_Camera);
+		Hickory::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -195,10 +179,12 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(Hickory::Event& event) override
+	void OnEvent(Hickory::Event& e) override
 	{
+		m_CameraController.OnEvent(e);
 	}
 private:
+	Hickory::OrthographicCameraController m_CameraController;
 	Hickory::ShaderLibrary m_ShaderLibrary;
 	Hickory::Ref<Hickory::Shader> m_Shader;
 	Hickory::Ref<Hickory::VertexArray> m_VertexArray;
@@ -207,13 +193,6 @@ private:
 	Hickory::Ref<Hickory::VertexArray> m_SquareVA;
 
 	Hickory::Ref<Hickory::Texture2D> m_Texture, m_ChernoLogoTexture;
-
-	Hickory::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 5.0f;
-
-	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 180.0f;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };

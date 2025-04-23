@@ -165,6 +165,7 @@
     <ClInclude Include="src\Hickory\Renderer\Buffer.h" />
     <ClInclude Include="src\Hickory\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Hickory\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Hickory\OrthographicCameraController.h" />
     <ClInclude Include="src\Hickory\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Hickory\Renderer\Renderer.h" />
     <ClInclude Include="src\Hickory\Renderer\RendererAPI.h" />
@@ -610,6 +611,7 @@
     <ClCompile Include="src\Hickory\Log.cpp" />
     <ClCompile Include="src\Hickory\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Hickory\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Hickory\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Hickory\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Hickory\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Hickory\Renderer\RendererAPI.cpp" />

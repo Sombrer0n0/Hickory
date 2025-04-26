@@ -150,7 +150,7 @@
     <ClInclude Include="src\Hickory\Application.h" />
     <ClInclude Include="src\Hickory\Core.h" />
     <ClInclude Include="src\Hickory\Core\TimeStep.h" />
-    <ClInclude Include="src\Hickory\EntryPoint.h" />
+    <ClInclude Include="src\Hickory\Core\EntryPoint.h" />
     <ClInclude Include="src\Hickory\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Hickory\Events\Event.h" />
     <ClInclude Include="src\Hickory\Events\KeyEvent.h" />
@@ -168,6 +168,7 @@
     <ClInclude Include="src\Hickory\OrthographicCameraController.h" />
     <ClInclude Include="src\Hickory\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Hickory\Renderer\Renderer.h" />
+    <ClInclude Include="src\Hickory\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Hickory\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Hickory\Renderer\Shader.h" />
     <ClInclude Include="src\Hickory\Renderer\Texture.h" />
@@ -614,6 +615,7 @@
     <ClCompile Include="src\Hickory\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Hickory\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Hickory\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Hickory\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Hickory\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Hickory\Renderer\Shader.cpp" />
     <ClCompile Include="src\Hickory\Renderer\Texture.cpp" />
